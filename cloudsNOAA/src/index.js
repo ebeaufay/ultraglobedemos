@@ -59,8 +59,7 @@ map.setLayer(wmsLayer, 1);
 
 var environmentLayer = new NOAAGFSCloudsLayer({
     id: 84,
-    name: "clouds",
-    quality: 0.5
+    name: "clouds"
 });
 map.setLayer(environmentLayer, 3);
 // set a specific date on the map to get forecast cloud cover (or use the clock widget). NOAA GFS service only provides forecast for a limited amount of time in the future

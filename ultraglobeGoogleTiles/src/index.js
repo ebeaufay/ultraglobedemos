@@ -21,7 +21,7 @@ var googleMaps3DTiles = new GoogleMap3DTileLayer({
     id: 3,
     name: "Google Maps 3D Tiles",
     visible: true,
-    apiKey: "Add your google maps API key here!!!",
+    apiKey: "AIzaSyA_SPDWsgOZdxq1eyQpKJryK-41MtOT0BU",
     loadOutsideView: false,
     geometricErrorMultiplier:0.75,
     //loadingStrategy: "IMMEDIATE", // uncomment to use immediate loading (faster with holes)
