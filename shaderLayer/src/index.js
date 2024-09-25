@@ -39,7 +39,7 @@ var wmsLayer = new WMSLayer({
     id: 1,
     name: "BlueMarble",
     bounds: [-180, -90, 180, 90],
-    url: "https://www.gebco.net/data_and_products/gebco_web_services/web_map_service/mapserv",
+    url: "https://wms.gebco.net/mapserv",
     layer: "GEBCO_LATEST_SUB_ICE_TOPO",
     epsg: "EPSG:4326",
     version: "1.3.0",
