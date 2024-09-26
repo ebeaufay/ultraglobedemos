@@ -15,16 +15,16 @@ let map = new Map({
 
 });
 
-map.moveAndLookAt({ x: 13.42, y: 52.480, z: 300 }, { x: 13.42, y: 52.4895, z: 170 })
+map.moveAndLookAt({ x: -2.915, y: 53.392, z: 300 }, { x: -2.915, y: 53.3922, z: 170 })
 
 var googleMaps3DTiles = new GoogleMap3DTileLayer({
     id: 3,
     name: "Google Maps 3D Tiles",
     visible: true,
-    apiKey: "Add your google maps API key here!!!",
+    apiKey: "AIzaSyD8itL-pHmdilXJY8FXvS7I25IJypc-MCI", // replace with your google maps API key
     loadOutsideView: false,
     geometricErrorMultiplier:0.75,
-    //loadingStrategy: "IMMEDIATE", // uncomment to use immediate loading (faster with holes)
+    //loadingStrategy: "IMMEDIATE", // uncomment to use immediate loading (faster with gaps)
     displayCopyright: true,
 }); 
 map.setLayer(googleMaps3DTiles, 0);
