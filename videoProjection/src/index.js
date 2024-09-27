@@ -22,7 +22,7 @@ var googleMaps3DTiles = new GoogleMap3DTileLayer({
     id: 3,
     name: "Google Maps 3D Tiles",
     visible: true,
-    apiKey: "AIzaSyD8itL-pHmdilXJY8FXvS7I25IJypc-MCI", // replace with your google maps API key
+    apiKey: "AIzaSyD8itL-pHmdilXJY8FXvS7I25IJypc-MCI", // replace with your google maps API key!!
     loadOutsideView: false,
     geometricErrorMultiplier: 0.75,
     loadingStrategy: "INCREMENTAL",
