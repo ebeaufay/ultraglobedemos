@@ -58,10 +58,17 @@ const cubeLayer = new ObjectLayer({
     object: cube,
     longitude: 13,
     latitude: 10,
-    height: 9000
+    height: 9000,
+    yaw: 0,
+    pitch:0,
+    roll:0,
+    scaleX:1,
+    scaleY:1,
+    scaleZ:1
 })
 map.setLayer(cubeLayer, 2);
 
+// Object rotation works through yaw pitch roll but you can also rotate a mesh in it's local coordinate system independently of the Object layer through three.js standard API
 const thorusGeometry = new THREE.TorusGeometry( 20000, 2000, 16, 100 ); 
 const thorusMaterial = new THREE.MeshPhongMaterial( { color: 0x0088ff } ); 
 const thorus = new THREE.Mesh( thorusGeometry, thorusMaterial ); 
@@ -74,11 +81,17 @@ const thorusLayer = new ObjectLayer({
     object: thorus,
     longitude: 11,
     latitude: 8,
-    height: 1800
+    height: 1800,
+    yaw: 0,
+    pitch:0,
+    roll:0,
+    scaleX:1,
+    scaleY:1,
+    scaleZ:1
 })
 map.setLayer(thorusLayer, 3);
 
-// if data is already georeferenced, you can still use the ObjectLayer to add it to the scene.
+// If you want add data to the scene directly through three.js, retrieve the three.js scene from the map (Map#scene)
 const points = [];
 let geodeticPoint = { x: 0, y: 0, z: 0 };
 for (let i = 0; i < 201; i++) {
@@ -102,13 +115,7 @@ for(let i = 0; i<100; i++){
     line.scale.set(scale, scale, scale)
     lines.add(line);
 }
-
-const linesLayer = new ObjectLayer({
-    id: 4,
-    name: "lines",
-    object: lines
-})
-map.setLayer(linesLayer, 4);
+map.scene.add(lines);
 
 
 

@@ -48,7 +48,8 @@ var environmentLayer = new RandomCloudsLayer({
     minHeight: 1000,
     maxHeight: 30000,
     density: 0.15*Math.random()+0.02,
-    windSpeed:0.07
+    windSpeed:0.07,
+    quality:1
 });
 map.setLayer(environmentLayer, 3);
 

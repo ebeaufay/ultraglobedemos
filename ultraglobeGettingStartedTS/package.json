@@ -23,7 +23,7 @@
     "author": "Emeric Beaufays",
     "license": "MIT",
     "dependencies": {
-        "@jdultra/ultra-globe": "^4.5.8"
+        "@jdultra/ultra-globe": "^5.0.3"
     },
     "devDependencies": {
         "@babel/core": "^7.21.4",
@@ -40,7 +40,7 @@
         "typescript": "^5.3.2",
         "webpack": "^5.79.0",
         "webpack-cli": "^5.0.1",
-        "webpack-dev-server": "^4.13.2",
+        "webpack-dev-server": "^5.1.0",
         "webpack-glsl-loader": "^1.0.1",
         "whatwg-fetch": "^3.5.0"
     }

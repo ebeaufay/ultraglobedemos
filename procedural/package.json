@@ -1,5 +1,5 @@
 {
-    "name": "@jdultra/clouds",
+    "name": "@jdultra/procedural",
     "version": "1.0.0",
     "description": "random clouds",
     "main": "index.js",
@@ -23,7 +23,7 @@
     "author": "Emeric Beaufays",
     "license": "MIT",
     "dependencies": {
-        "@jdultra/ultra-globe": "^4.5.8"
+        "@jdultra/ultra-globe": "^5.0.3"
     },
     "devDependencies": {
         "@babel/core": "^7.21.4",

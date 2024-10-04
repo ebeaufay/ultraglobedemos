@@ -23,7 +23,7 @@
     "author": "Emeric Beaufays",
     "license": "MIT",
     "dependencies": {
-        "@jdultra/ultra-globe": "^4.6.1"
+        "@jdultra/ultra-globe": "^5.0.3"
     },
     "devDependencies": {
         "@babel/core": "^7.21.4",

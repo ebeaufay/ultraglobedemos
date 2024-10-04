@@ -1,6 +1,6 @@
 {
-    "name": "@jdultra/ultraglobe_getting_started",
-    "version": "6.0.0",
+    "name": "@jdultra/noaa_clouds",
+    "version": "1.0.0",
     "description": "get started with ultraglobe",
     "main": "index.js",
     "scripts": {
@@ -23,7 +23,7 @@
     "author": "Emeric Beaufays",
     "license": "MIT",
     "dependencies": {
-        "@jdultra/ultra-globe": "^4.5.8"
+        "@jdultra/ultra-globe": "^5.0.3"
     },
     "devDependencies": {
         "@babel/core": "^7.21.4",

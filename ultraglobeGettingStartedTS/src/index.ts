@@ -52,9 +52,12 @@ const ogc3dTiles: OGC3DTilesLayer = new OGC3DTilesLayer({
     longitude: 13.42,
     latitude: 52.4895,
     height: 172,
-    rotationY: 0.72,
-    rotationX: 3.1416,
-    scale: 1.0,
+    yaw: 0,
+    pitch: 180,
+    roll: 0,
+    scaleX: 1,
+    scaleY: 1,
+    scaleZ: 1,
     geometricErrorMultiplier: 0.03,
     loadOutsideView: false
 });

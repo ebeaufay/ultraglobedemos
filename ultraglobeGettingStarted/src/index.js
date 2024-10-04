@@ -17,7 +17,6 @@ let map = new Map({
 });
 
 
-
 map.moveAndLookAt({ x: 13.42, y: 52.480, z: 300 }, { x: 13.42, y: 52.4895, z: 170 })
 
 
@@ -55,9 +54,12 @@ var ogc3dTiles = new OGC3DTilesLayer({
     longitude: 13.42,
     latitude: 52.4895,
     height: 172,
-    rotationY: 0.72,
-    rotationX: 3.1416,
-    scale: 1.0,
+    yaw: 0,
+    pitch: 180,
+    roll: 0,
+    scaleX: 1,
+    scaleY: 1,
+    scaleZ: 1,
     geometricErrorMultiplier: 0.02,
     loadOutsideView: false,
 });
