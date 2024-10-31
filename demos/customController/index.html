@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" name="viewport">
+  <title>ULTRAGLOBE getting started</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden; /* This will prevent scrolling if the content is larger than the screen */
+    }
+  </style>
+</head>
+
+<body>
+  <div id="screen" oncontextmenu="return false;" style="position:fixed;width:100%; height:100%;"></div>
+  <div 
+    class="parent" 
+    style="
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      height: 300px; 
+      position: relative; 
+      z-index: 9000;
+    "
+  >
+    <div 
+      class="child" 
+      style="
+        margin-top: 10px;
+        white-space: pre;
+      "
+    >
+      Controls: arrows|wasd      rotate: Q|E       Accelerate: space bar
+    </div>
+</body>
+
+</html>
