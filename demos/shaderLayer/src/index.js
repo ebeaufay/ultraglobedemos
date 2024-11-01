@@ -2,6 +2,7 @@ import { Map, SingleImageElevationLayer, WMSLayer, JetElevation } from '@jdultra
 import earthElevationImage from './images/earth_elevation.jpg';
 import {CustomShaderLayer} from './customShaderLayer.js'
 
+
 let map = new Map({
     divID: 'screen',
     clock: false,

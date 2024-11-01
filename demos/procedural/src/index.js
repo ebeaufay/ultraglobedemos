@@ -9,7 +9,7 @@ let map = new Map({
     detailMultiplier: 1.0,
     ocean: generateAtmosphereColor(),
     atmosphere: generateAtmosphereColor(),
-    atmosphereDensity: 0.8+Math.random()*0.4,
+    atmosphereDensity: 1.0,
     sun: Math.random()<0.2?false:new THREE.Vector3(Math.random(), Math.random(), Math.random()),
     rings:true,
     space: true,

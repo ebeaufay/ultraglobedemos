@@ -5,9 +5,11 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require('terser-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const fs = require('fs');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CopyPlugin = require('copy-webpack-plugin');
 
 const DEFAULT_WEBPACK_PORT = 3001;
-const isDevelopment = process.env.NODE_ENV !== 'production';
+const isDevelopment = false;
 
 const testAppsDir = path.resolve(__dirname, './demos/');
 
@@ -49,18 +51,29 @@ module.exports = {
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, './dist'),
-    clean: true,
+    //clean: true,
+    publicPath: './'
   },
 
   plugins: [
     new webpack.ProgressPlugin(),
+    //new BundleAnalyzerPlugin(),
     ...htmlPlugins,
     isDevelopment ? new webpack.HotModuleReplacementPlugin() : new MiniCssExtractPlugin({
       filename: "[name].bundle.[hash].css"
     }),
     isDevelopment && new ReactRefreshWebpackPlugin(),
-    new webpack.ProvidePlugin({
+    /* new webpack.ProvidePlugin({
       'THREE': 'three'
+    }), */
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'node_modules/@jdultra/ultra-globe/dist/assets'), // Adjust the path based on your library's asset location
+          to: 'assets', // Destination folder in the demo's dist
+        },
+        // Add other asset directories if needed
+      ],
     }),
   ].filter(Boolean),
 
@@ -113,7 +126,7 @@ module.exports = {
       {
         test: /\.(eot|woff|woff2|otf|ttf|svg)$/,
         use: [{
-          loader: "file-loader",
+          loader: "asset/resource",
           options: {
             name: "fonts/[name].[ext]"
           }
@@ -123,9 +136,25 @@ module.exports = {
         test: /\.glsl$/,
         loader: 'webpack-glsl-loader'
       },
+      
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
+        test: /\.(png|svg|jpg|jpeg|gif|bin)$/i,
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 8 * 1024, // 8 KB
+          },
+        },
+        generator: {
+          filename: 'assets/[hash][ext][query]',
+        },
+      },
+      {
+        test: /\.(glb|gltf|obj)$/i,
+        type: 'asset',
+        generator: {
+          filename: 'assets/[hash][ext][query]',
+        },
       },
       {
         test: /\.wasm$/,
@@ -134,13 +163,54 @@ module.exports = {
     ],
   },
   optimization: {
+    concatenateModules: true,
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name(module) {
+            // Extract the package name from the module path
+            
+            return `vendor`;
+          },
+          priority: -10,
+          reuseExistingChunk: true,
+        },
+        common: {
+          name: 'common',
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+      },
+    },
+    minimize: true,
     minimizer: [new TerserPlugin({
       parallel: true,
       terserOptions: {
-        mangle: true,
+        ecma: undefined,
+        parse: {},
+        compress: {
+          drop_console: true, // Remove console statements
+        },
+        mangle: true, // Note `mangle.properties` is `false` by default.
+        module: false,
+        // Deprecated
+        output: null,
+        format: {
+          comments: false, // Remove comments
+        },
+        toplevel: false,
+        nameCache: null,
+        ie8: false,
+        keep_classnames: undefined,
+        keep_fnames: false,
+        safari10: false,
       },
       exclude: []
-    })]
+    })
+    ],
   },
   devServer: {
     hot: true,
@@ -149,8 +219,15 @@ module.exports = {
     static: {
       directory: path.join(__dirname, 'dist'),
     },
+    client: {
+      logging: 'error', // Only log errors (no warnings or info)
+    },
   },
+  stats: 'errors-only',
   resolve: {
+    alias: {
+      three: path.resolve('./node_modules/three')
+    },
     extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
     fallback: {
       "fs": false,
@@ -160,4 +237,7 @@ module.exports = {
   experiments: {
     asyncWebAssembly: true,
   },
+  performance: {
+    hints: false
+  }
 };
