@@ -71,8 +71,8 @@ var environmentLayer = new RandomCloudsLayer({
     coverage: 0.5,
     minHeight: 0,
     maxHeight: 1000 + Math.random() * 5000,
-    density: 0.1 * Math.random() + 0.1,
-    windSpeed: 0.02,
+    density: Math.pow(Math.random(),2),
+    windSpeed: Math.random()*0.001,
 });
 map.setLayer(environmentLayer, 2);
 
@@ -102,24 +102,31 @@ loader.load(
             yaw: 0,
             pitch: 0,
             roll: 0,
-            scaleX: 0.025,
-            scaleY: 0.025,
-            scaleZ: 0.025
+            scaleX: 0.035,
+            scaleY: 0.035,
+            scaleZ: 0.035
         })
         map.setLayer(planeLayer, 2);
 
         // default controls (pan, rotate, zoom, select) can be removed
         map.controller.clear();
         
-        function moveToRandomLocation(){
-            const loc = cityLocations[Math.floor(Math.random()*cityLocations.length)];
+        let locationIndex = 0;
+        function moveToNextLocation(){
+            const loc = cityLocations[locationIndex++];
             planeLayer.move(loc.planePosition.x, loc.planePosition.y, loc.planePosition.z, 0,0,0,0.025,0.025,0.025);
             map.moveAndLookAt({ x: loc.cameraStart.x, y: loc.cameraStart.y, z: loc.cameraStart.z }, { x: loc.planePosition.x, y: loc.planePosition.y, z: loc.planePosition.z });
             document.getElementById("place").innerText = loc.name;
+
+            environmentLayer.density = Math.pow(Math.random(),2);
+            environmentLayer.minHeight = Math.random() * 2000;
+            environmentLayer.maxHeight = environmentLayer.minHeight + Math.random() * 5000;
+            environmentLayer.density = Math.pow(Math.random(),2);
+            environmentLayer.windSpeed = Math.random()*0.001;
         }
-        moveToRandomLocation();
+        moveToNextLocation();
         document.getElementById("changeLocation").addEventListener('mouseup', e => {
-            moveToRandomLocation();
+            moveToNextLocation();
         })
 
         // append the custom controller

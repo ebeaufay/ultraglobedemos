@@ -3,13 +3,12 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require('terser-webpack-plugin');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const fs = require('fs');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CopyPlugin = require('copy-webpack-plugin');
 
 const DEFAULT_WEBPACK_PORT = 3001;
-const isDevelopment = false;
+const isDevelopment = true;
 
 const testAppsDir = path.resolve(__dirname, './demos/');
 
@@ -62,7 +61,6 @@ module.exports = {
     isDevelopment ? new webpack.HotModuleReplacementPlugin() : new MiniCssExtractPlugin({
       filename: "[name].bundle.[hash].css"
     }),
-    isDevelopment && new ReactRefreshWebpackPlugin(),
     /* new webpack.ProvidePlugin({
       'THREE': 'three'
     }), */
@@ -71,7 +69,7 @@ module.exports = {
         {
           from: path.resolve(__dirname, 'node_modules/@jdultra/ultra-globe/dist/assets'), // Adjust the path based on your library's asset location
           to: 'assets', // Destination folder in the demo's dist
-        },
+        }
         // Add other asset directories if needed
       ],
     }),
@@ -89,12 +87,8 @@ module.exports = {
           options: {
             presets: [
               "@babel/preset-env",
-              "@babel/preset-react",
               "@babel/preset-typescript"
             ],
-            plugins: [
-              isDevelopment && require.resolve('react-refresh/babel')
-            ].filter(Boolean),
           },
         },
       },
@@ -160,11 +154,18 @@ module.exports = {
         test: /\.wasm$/,
         type: "webassembly/async",
       },
+      {
+        test: /\.worker\.js$/,
+        loader: "worker-loader",
+        options: {
+          filename: "[name].js",
+        },
+      },
     ],
   },
   optimization: {
-    concatenateModules: true,
-    splitChunks: {
+    //concatenateModules: true,
+    /* splitChunks: {
       chunks: 'all',
       cacheGroups: {
         vendors: {
@@ -184,7 +185,7 @@ module.exports = {
           reuseExistingChunk: true,
         },
       },
-    },
+    }, */
     minimize: true,
     minimizer: [new TerserPlugin({
       parallel: true,

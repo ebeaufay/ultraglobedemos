@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-<html>
-
 <head>
   <meta charset="utf-8" />
-  <title>ULTRAGLOBE google tiles</title>
   <meta content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" name="viewport">
+  <title>ULTRAGLOBE vectors</title>
   <style>
-    body, html {
+    body,
+    html {
       margin: 0;
       padding: 0;
-      overflow: hidden; /* This will prevent scrolling if the content is larger than the screen */
+      overflow: hidden;
+      /* This will prevent scrolling if the content is larger than the screen */
     }
     .outlinedText {
       position: absolute;
@@ -43,13 +42,25 @@
 
 <body>
   <div id="screen" oncontextmenu="return false;" style="position:fixed;width:100%; height:100%;"></div>
-
   <div id="website" class="outlinedText unselectable"
     style="position: absolute;top: 20px; left:25px; z-index: 99;font-size: 16px;font-family: 'Orbitron', sans-serif;letter-spacing: 0.3em;cursor: pointer;color:white">
     <img src="https://storage.googleapis.com/jdultra-website/assets/iconSmall.png" class="unselectable" width="14px"
       height="14px"><span class="unselectable">
       JDULTRA</span>
   </div>
+  <div class="outlinedText unselectable"
+    style="display: flex; flex-direction: column; align-items: center; position: absolute;bottom: 20px; width:100%; z-index: 99;font-family: 'Orbitron', sans-serif;letter-spacing: 0.3em;cursor: pointer;color:white; pointer-events: none;">
+    <div>click : select | ctrl+click : add-select | shift+click : subtract-select</div>
+  </div>
+  <script>
+    document.getElementById('screen').addEventListener('wheel', function (event) {
+      event.preventDefault();
+    }, { passive: false });
+
+    document.getElementById('website').addEventListener('click', function () {
+      window.location.href = 'http://www.jdultra.com';
+    });
+  </script>
 </body>
 
 </html>

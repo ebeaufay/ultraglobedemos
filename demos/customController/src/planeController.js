@@ -34,7 +34,7 @@ class PlaneController extends Controller {
         this.rollQuaternion = new THREE.Quaternion();
         this.gravityQuaternion = new THREE.Quaternion();
         
-        this.cameraOffset = new THREE.Vector3(0, 5, -30);
+        this.cameraOffset = new THREE.Vector3(0, 5, -20);
         this.targetCameraPosition = new THREE.Vector3();
         this.targetCameraQuaternion = new THREE.Quaternion();
         
@@ -154,7 +154,7 @@ class PlaneController extends Controller {
         self.camera.position.lerp(self.targetCameraPosition, 0.1);
 
         self.targetCameraQuaternion.multiplyQuaternions(self.object3D.quaternion, rotation180);
-        self.camera.quaternion.slerp(self.targetCameraQuaternion, 0.1);
+        self.camera.quaternion.slerp(self.targetCameraQuaternion, 0.035);
         self.camera.up.set(0,1,0).applyQuaternion(self.camera.quaternion).normalize();
     }
     

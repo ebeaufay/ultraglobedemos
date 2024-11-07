@@ -1,5 +1,5 @@
 import { Map, GoogleMap3DTileLayer, ProjectedLayer } from '@jdultra/ultra-globe';
-
+import * as THREE from "three"
 let map = new Map({
     divID: 'screen',
     clock: false,
@@ -52,8 +52,8 @@ let roll = -40;
 setInterval(() => {
     lat -= 0.000001;
     lon -= 0.000001;
-    yaw+=0.05;
-    roll+=1;
+    yaw+=0.2;
+    roll+=0.1;
     projectedLayer.setCameraFromLLHYawPitchRollFov(new THREE.Vector3(lon, lat, 1750), yaw, pitch, roll, 20);
 }, 17);
 
@@ -69,6 +69,8 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 } else {
     console.error('MediaDevices interface not available.');
 }
+
+
 
 // UI
 const depthTestBtn = document.getElementById("depthTest");

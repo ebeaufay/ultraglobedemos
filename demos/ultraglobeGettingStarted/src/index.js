@@ -22,7 +22,7 @@ map.moveAndLookAt({ x: 13.42, y: 52.480, z: 300 }, { x: 13.42, y: 52.4895, z: 17
 
 
 // elevation layer 
-/* var wmsElevation = new WMSElevationLayer({
+var wmsElevation = new WMSElevationLayer({
     id:0,
     name:"wmsElevation",
     bounds: [-180, -90, 180, 90],
@@ -34,10 +34,10 @@ map.moveAndLookAt({ x: 13.42, y: 52.480, z: 300 }, { x: 13.42, y: 52.4895, z: 17
     transparency: 0.0,
     maxResolution: 30
 })
-map.setLayer(wmsElevation, 0); */
+map.setLayer(wmsElevation, 0);
 
 //alternative elevation from single image
-var earthElevation = new SingleImageElevationLayer({
+/* var earthElevation = new SingleImageElevationLayer({
     id: 1,
     name: "singleImageEarthElevation",
     bounds: [-180, -90, 180, 90],
@@ -47,7 +47,7 @@ var earthElevation = new SingleImageElevationLayer({
     min: -100,
     max: 8800
 });
-map.setLayer(earthElevation, 0);
+map.setLayer(earthElevation, 0); */
 
 //base layer
 var bluemarble = new WMSLayer({
