@@ -1,6 +1,7 @@
-import { Map, SingleImageImageryLayer, WMSElevationLayer, GeoJsonLayer, VectorLayer } from '@jdultra/ultra-globe';
+import { Map, SingleImageImageryLayer, SingleImageElevationLayer, GeoJsonLayer } from '@jdultra/ultra-globe';
 import * as THREE from "three";
 import worldPurple from "../images/worldPurple.jpg"
+import earthElevationImage from '../images/earth_elevation.jpg';
 
 let map = new Map({
     divID: 'screen',
@@ -13,25 +14,22 @@ let map = new Map({
     atmosphereDensity: 1.0,
     sun: true,
     rings:false,
-    space: true,
+    space: new THREE.Color(0.4,0.35,0.8),
 
 });
 
 map.moveAndLookAt({ x: 0, y: 0, z: 20000000 }, { x: 0, y: 1, z: 30000 })
 
-var wmsElevation = new WMSElevationLayer({
-    id:0,
-    name:"wmsElevation",
+const earthElevation = new SingleImageElevationLayer({
+    id: 0,
+    name: "singleImageEarthElevation",
     bounds: [-180, -90, 180, 90],
-    url: "https://worldwind26.arc.nasa.gov/elev",
-    epsg: "EPSG:4326",
-    version: "1.3.0",
-    layer: "aster_v2",
+    url: earthElevationImage,
     visible: true,
-    transparency: 0.0,
-    maxResolution: 30
-})
-map.setLayer(wmsElevation, 0);
+    min: -100,
+    max: 8880
+});
+map.setLayer(earthElevation, 0);
 
 var singleImage = new SingleImageImageryLayer({
     id: 1,
