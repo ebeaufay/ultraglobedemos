@@ -113,7 +113,7 @@ loader.load(
         
         let locationIndex = 0;
         function moveToNextLocation(){
-            const loc = cityLocations[locationIndex++];
+            const loc = cityLocations[(locationIndex++)%cityLocations.length];
             planeLayer.move(loc.planePosition.x, loc.planePosition.y, loc.planePosition.z, 0,0,0,0.025,0.025,0.025);
             map.moveAndLookAt({ x: loc.cameraStart.x, y: loc.cameraStart.y, z: loc.cameraStart.z }, { x: loc.planePosition.x, y: loc.planePosition.y, z: loc.planePosition.z });
             document.getElementById("place").innerText = loc.name;

@@ -22,6 +22,7 @@ var googleMaps3DTiles = new GoogleMap3DTileLayer({
     id: 3,
     name: "Google Maps 3D Tiles",
     visible: true,
+    
     apiKey: "AIzaSyD8itL-pHmdilXJY8FXvS7I25IJypc-MCI", // replace with your google maps API key!!
     loadOutsideView: false,
     geometricErrorMultiplier: 0.75,
@@ -34,6 +35,14 @@ map.setLayer(googleMaps3DTiles, 0);
 const video = document.createElement('video');
 const videoTexture = new THREE.VideoTexture(video);
 
+// use any texture, not limited to video texture:
+/* const data = new Uint8Array([
+    255, 0, 0, 200, 255, 0, 0, 200,
+    255, 0, 0, 200, 255, 0, 0, 200
+  ]);
+  const tex = new THREE.DataTexture(data, 2, 2, THREE.RGBAFormat);
+  tex.needsUpdate = true; */
+
 // The projected layer also accepts regular textures, not only VideoTexture
 const projectedLayer = new ProjectedLayer({
     id: 983,
@@ -43,19 +52,19 @@ const projectedLayer = new ProjectedLayer({
     chromaKeying: false,
 });
 map.setLayer(projectedLayer, 9);
-
+projectedLayer.setCameraFromLLHYawPitchRollFov(new THREE.Vector3(-103.455, 43.87879500659957, 1750), 90, -20, 0, 20);
 let lat = 43.87879500659957;
 let lon = -103.455;
 let yaw = 0;
 let pitch = -20;
 let roll = -40;
-setInterval(() => {
+/* setInterval(() => {
     lat -= 0.000001;
     lon -= 0.000001;
     yaw+=0.2;
     roll+=0.1;
-    projectedLayer.setCameraFromLLHYawPitchRollFov(new THREE.Vector3(lon, lat, 1750), yaw, pitch, roll, 20);
-}, 17);
+    
+}, 17); */
 
 // stream webcam
 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {

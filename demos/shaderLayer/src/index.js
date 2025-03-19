@@ -50,16 +50,16 @@ map.setLayer(wmsLayer, 1);
 
 
 var slope = new CustomShaderLayer({
-    id: 1,
+    id: 2,
     name: "customShaderLayer",
     bounds: [-180, -90, 180, 90],
     transparency: 0.25,
     visible: true
     
 })
-map.setLayer(slope, 2);
+map.setLayer(slope, 3);
 var jetElevation = new JetElevation({
-    id: 1,
+    id: 3,
     name: "jet Elevation",
     bounds: [-180, -90, 180, 90],
     transparency: 0.5,
@@ -68,7 +68,7 @@ var jetElevation = new JetElevation({
     max:100000
     
 });
-map.setLayer(jetElevation, 3);
+map.setLayer(jetElevation, 2);
 
 const heightButton = document.getElementById("heightBtn");
 const slopeButton = document.getElementById("slopeBtn");
@@ -91,12 +91,12 @@ setTimeout(()=>{
 
 
 function showSlope(){
-    jetElevation.setVisible(false);
+    jetElevation.visible =false;
     slope.setVisible(true);
 }
 function showJetElevation(){
+    slope.visible = false;
     jetElevation.setVisible(true);
-    slope.setVisible(false);
 }
 //map.setLayer(jetElevation, 3);
 

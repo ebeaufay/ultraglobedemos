@@ -1,7 +1,12 @@
-import { Map, SingleImageImageryLayer, SingleImageElevationLayer, GeoJsonLayer } from '@jdultra/ultra-globe';
+import { Map, SingleImageImageryLayer, SingleImageElevationLayer, GeoJsonLayer, SHPLayer } from '@jdultra/ultra-globe';
 import * as THREE from "three";
 import worldPurple from "../images/worldPurple.jpg"
 import earthElevationImage from '../images/earth_elevation.jpg';
+import countriesGeoJson from '../data/countries.geojson';
+import capitalsGeoJson from '../data/capitals.geojson';
+import pin from '../images/pin.png';
+import point from '../images/point.png';
+import settlements from '../data/ne_10m_populated_places_simple.shp';
 
 let map = new Map({
     divID: 'screen',
@@ -26,8 +31,8 @@ const earthElevation = new SingleImageElevationLayer({
     bounds: [-180, -90, 180, 90],
     url: earthElevationImage,
     visible: true,
-    min: -100,
-    max: 8880
+    min: 0,
+    max: 100000
 });
 map.setLayer(earthElevation, 0);
 
@@ -43,7 +48,7 @@ map.setLayer(singleImage, 1);
 const countries = new GeoJsonLayer({
     id: 2,
     name: "countries",
-    geoJson: "http://localhost:8080/countries.geojson",
+    geoJson: countriesGeoJson,
     selectable: true,
     maxSegmentLength: 100,
     transparency:0,
@@ -55,6 +60,45 @@ const countries = new GeoJsonLayer({
 });
 
 map.setLayer(countries, 2);
+
+const texture = new THREE.TextureLoader().load(pin);
+const capitals = new GeoJsonLayer({
+    id: 3,
+    name: "capitals",
+    geoJson: capitalsGeoJson,
+    selectable: true,
+    maxSegmentLength: 100,
+    transparency:0,
+    pointColor: new THREE.Color(1.0, 1.0, 1.0),
+    pointAnchor:new THREE.Vector2(0.5,0.0),
+    pointTexture: texture,
+    pointColor: new THREE.Color(1.0,0.0,1.0),
+    selectedPointColor: new THREE.Color(1.0,1.0,0.0),
+    pointSize: 70,
+    pointWorldSized: false,
+    draped: false
+});
+
+map.setLayer(capitals, 3);
+
+const texture2 = new THREE.TextureLoader().load(point);
+const settlementsLayer = new SHPLayer({
+    id: 4,
+    name: "settlements",
+    shp: "http://localhost:8081/ne_10m_populated_places_simple.shp",
+    selectable: true,
+    maxSegmentLength: 100,
+    transparency:0,
+    pointColor: new THREE.Color(0.0, 1.0, 1.0),
+    pointTexture: texture2,
+    selectedPointColor: new THREE.Color(1.0,0.0,1.0),
+    pointSize: 15000,
+    pointWorldSized: false,
+    pointAnchor:new THREE.Vector2(0.5,0.5),
+    draped: true
+});
+
+map.setLayer(settlementsLayer, 4);
 
 /* var customVectors = new VectorLayer({
     id: 3,
@@ -77,7 +121,7 @@ map.addSelectionListener(e=>{
         const selectedLayer = map.getLayerByID(layerID);
         if(selectedLayer.isVectorLayer){
             e.selection[layerID].forEach(selectedObject=>{
-                selection.push(selectedLayer.objects[selectedObject.uuid].properties);
+                selection.push(selectedLayer.getProperties(selectedObject.uuid, selectedObject.index));
             })
         }
         

@@ -22,13 +22,15 @@
     "author": "Emeric Beaufays",
     "license": "MIT",
     "dependencies": {
-        "@jdultra/ultra-globe": "7.0.1"
+        "@jdultra/ultra-globe": "file:../UltraGlobe",
+        "@jdultra/threedtiles": "13.1.4",
+        "three": "^0.173.0"
     },
     "devDependencies": {
-        "@types/three": "^0.169.0",
+        "@types/three": "^0.173.0",
         "fast-glob": "^3.3.2",
         "glob": "^11.0.0",
         "typescript": "^5.6.3",
-        "vite": "^5.4.10"
+        "vite": "^6.2.0"
     }
 }

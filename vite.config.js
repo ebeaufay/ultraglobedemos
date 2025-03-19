@@ -45,5 +45,11 @@ export default defineConfig({
     '**/*.svg',
     '**/*.gif',
     '**/*.ktx2',
+    '**/*.geojson',
+    '**/*.cpg',
+    '**/*.dbf',
+    '**/*.prj',
+    '**/*.shp',
+    '**/*.shx',
   ],
 });
